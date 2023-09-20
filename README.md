@@ -24,6 +24,10 @@ git branch <category/reference/description-in-kebab-case>
 git commit -m '<Action something; Action some other things>'
 ```
 
+### Resources
+
+- [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
+
 
 
 
