@@ -19,7 +19,7 @@ Example
 - chore
 
 ```sh
-git commit -m '<category: do something; do some other things>'
+git commit -m '<Action something; Action some other things>'
 ```
 
 
