@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "codemaker"
+version = "0.1.0"
+description = "Leverages gtp-engineer to creates boilerplate code in any language"
+authors = ["Felipe Restrepo <maferelo@outlook.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+gpt-engineer = "^0.0.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
