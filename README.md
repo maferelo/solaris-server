@@ -2,14 +2,6 @@
 
 Solaris python services
 
-## Prerequisites
-
-- [Python 3.11](https://docs.python.org/3/)
-- [Poetry](https://python-poetry.org/docs/#installation)
-- [Docker](https://docs.docker.com/get-docker/)
-- [brew](https://brew.sh/)
-- [Gpg-suite](https://gpgtools.org/)
-
 ## Installation
 
 ### Windows
@@ -96,11 +88,7 @@ Coming soon
     poetry install
 ```
 
-## Branching naming conventions
-
-```sh
-    git branch <category/reference/description-in-kebab-case>
-```
+## Branch and commit naming conventions
 
 ### category
 
@@ -108,6 +96,10 @@ Coming soon
 - fix
 - refactor
 - chore
+
+```sh
+    git commit -m '<category>: <description>; <description>'
+```
 
 #### Example
 
@@ -146,7 +138,7 @@ git commit -m '<Action something; Action some other things>'
 ### Add dependencies
 
 ```sh
-    poetry add <dependency>
+    poetry add <dependency>@<version>
 ```
 
 ### Update dependencies
