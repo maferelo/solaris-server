@@ -152,3 +152,52 @@ git commit -m '<Action something; Action some other things>'
 ```sh
     poetry remove <dependency>
 ```
+
+## Deployment
+
+### Create Heroku app
+
+```sh
+    heroku create <app-name>
+```
+
+### Enable container registry
+
+```sh
+    heroku container:login
+```
+
+### Build image
+
+```sh
+    docker build -t registry.heroku.com/<app-name>/<process-type> .
+```
+
+Make sure to replace <app-name> with the name of the Heroku app that you just created and <process-type> with web since this will be for a [web process](https://devcenter.heroku.com/articles/procfile#the-web-process-type) [^5].
+  
+[^5]: [Deploying and Hosting a Machine Learning Model with FastAPI and Heroku](https://testdriven.io/blog/fastapi-machine-learning/)
+
+### Push image
+
+```sh
+    docker push registry.heroku.com/<app-name>/<process-type>
+```
+
+### Release image
+
+```sh
+    heroku container:release -a <app-name> <process-type>
+```
+
+### Check logs
+
+```sh
+    heroku logs --tail
+```
+
+### Open app
+
+```sh
+    heroku open
+```
+
