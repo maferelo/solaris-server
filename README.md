@@ -18,81 +18,88 @@ Coming soon
 
 ### UNIX/MacOS
 
-1. Install [Homebrew](https://brew.sh/):
+#### Install [Homebrew](https://brew.sh/)
 
-    ```sh
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    ```
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 
-2. Install [Docker](https://docs.docker.com/), [Vscode](https://code.visualstudio.com/docs), [python-tk](https://docs.python.org/es/3/library/tkinter.html), and [Gpg-suite](https://gpgtools.org/)
+#### Install [Docker](https://docs.docker.com/), [Vscode](https://code.visualstudio.com/docs), [python-tk](https://docs.python.org/es/3/library/tkinter.html), and [Gpg-suite](https://gpgtools.org/)
 
-    ```sh
-        brew install --cask docker visual-studio-code gpg-suite
-    ```
+```sh
+    brew install --cask docker visual-studio-code gpg-suite
+```
 
-    ```sh
-        brew install python-tk
-    ```
+```sh
+    brew install python-tk
+```
 
-3. Setup GPG git signing:
+#### Setup git with GPG signing
 
-    A. Generate a new GPG key [^1]
+##### Configure git
 
-    ```sh
-        gpg --full-generate-key
-    ```
+```sh
+    git config --global user.name "<your-name>"
+    git config --global user.email "<your-email>"
+```
 
-    B. Configure key in git [^1]
+##### Generate a new GPG key [^1]
 
-    ```sh
-        gpg --full-generate-key
-        gpg --list-secret-keys --keyid-format LONG
-        gpg --armor --export <KEY_ID>
-        git config --global user.signingkey <KEY_ID>
-        git config --global commit.gpgsign true
-    ```
+```sh
+    gpg --full-generate-key
+```
 
-    C. [Configure key in github](https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account)
+##### Configure key in git [^1]
 
-    [^1]: [Generating a new GPG key](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
+```sh
+    gpg --full-generate-key
+    gpg --list-secret-keys --keyid-format LONG
+    gpg --armor --export <KEY_ID>
+    git config --global user.signingkey <KEY_ID>
+    git config --global commit.gpgsign true
+```
 
-4. Install [Pyenv](https://github.com/pyenv/pyenv)[^2] [^3]:
+##### [Configure key in github](https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account)
 
-    ```sh
-        brew install pyenv
-        alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
-        echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
-        echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
-        echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
-    ```
+[^1]: [Generating a new GPG key](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
 
-    [^2]: [Pyenv Homebrew in macOS](https://github.com/pyenv/pyenv#homebrew-in-macos)
+#### Install [Pyenv](https://github.com/pyenv/pyenv)[^2] [^3]
 
-    [^3]: [Set up your shell environment for Pyenv](https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv)
+```sh
+    brew install pyenv
+    alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+    echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
+```
 
-5. Install [Python 3](https://docs.python.org/3/):
+[^2]: [Pyenv Homebrew in macOS](https://github.com/pyenv/pyenv#homebrew-in-macos)
 
-    ```sh
-        pyenv install
-    ```
+[^3]: [Set up your shell environment for Pyenv](https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv)
 
-6. Install [Poetry](https://python-poetry.org/docs/#installation):
+#### Install [Python 3](https://docs.python.org/3/)
 
-    ```sh
-        curl -sSL https://install.python-poetry.org | python3 - --version 1.6.1
-        poetry completions bash >> ~/.bash_completion
-    ```
+```sh
+    pyenv install
+```
 
-7. Install dependencies:
+#### Install [Poetry](https://python-poetry.org/docs/#installation)
 
-    ```sh
-        poetry install
-    ```
+```sh
+    curl -sSL https://install.python-poetry.org | python3 - --version 1.6.1
+    poetry completions bash >> ~/.bash_completion
+```
+
+#### Install dependencies
+
+```sh
+    poetry install
+```
 
 ## Branching naming conventions
 
 ```sh
-git branch <category/reference/description-in-kebab-case>
+    git branch <category/reference/description-in-kebab-case>
 ```
 
 ### category
