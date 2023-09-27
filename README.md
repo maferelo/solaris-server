@@ -132,7 +132,7 @@ git commit -m '<Action something; Action some other things>'
 ### Run tests
 
 ```sh
-    poetry run pytest
+    poetry run uvicorn main:app --reload --workers 1 --host 0.0.0.0 --port 8008
 ```
 
 ### Add dependencies
