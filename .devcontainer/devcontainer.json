@@ -9,6 +9,7 @@
     // /bin/sh -c "while sleep 1000; do :; done" when starting the container instead of the container’s default command
     "overrideCommand": false,
     "service": "django",
+    "remoteUser": "dev-user",
     "workspaceFolder": "/app",
     // Set *default* container specific settings.json values on container create.
     "customizations": {
