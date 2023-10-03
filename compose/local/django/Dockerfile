@@ -10,6 +10,11 @@ ENV BUILD_ENV ${BUILD_ENVIRONMENT}
 
 WORKDIR ${APP_HOME}
 
+
+# devcontainer dependencies and utils
+RUN apt-get update && apt-get install --no-install-recommends -y \
+  sudo git bash-completion nano ssh
+
 COPY ./compose/local/django/start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
