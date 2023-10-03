@@ -1,0 +1,13 @@
+// For format details, see https://containers.dev/implementors/json_reference/
+{
+    "name": "solaris_dev",
+    "dockerComposeFile": [
+        "../local.yml"
+    ],
+    "init": true,
+    // Tells devcontainer.json supporting services / tools whether they should run
+    // /bin/sh -c "while sleep 1000; do :; done" when starting the container instead of the container’s default command
+    "overrideCommand": false,
+    "service": "django",
+    "workspaceFolder": "/app"
+}
