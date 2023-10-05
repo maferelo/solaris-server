@@ -66,7 +66,7 @@ where `<type>` is one of the following:
 * `chore`: a chore commit
 
 and `<scope>` is a short description of the scope of the commit, and
-`<description>` is a short description of the commit.
+`<description>` is a short description of the commit starting with a verb.
 
 For example:
 
