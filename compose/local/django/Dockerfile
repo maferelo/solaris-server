@@ -59,6 +59,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # Install Heroku CLI
 RUN curl https://cli-assets.heroku.com/install.sh | sh
 
+# Bash theme
+RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+
 # All absolute dir copies ignore workdir instruction. All relative dir copies are wrt to the workdir instruction
 # copy python dependency wheels from python-build-stage
 COPY --from=python-build-stage /usr/src/app/wheels  /wheels/
