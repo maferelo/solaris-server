@@ -10,6 +10,9 @@ Welcome to Omibus's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   contents/install
+   contents/document
+
 
 
 Indices and tables
