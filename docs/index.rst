@@ -11,8 +11,9 @@ Welcome to Omibus's documentation!
    :caption: Contents:
 
    contents/install
-   contents/commit
+   contents/usage
    contents/document
+   contents/commit
    contents/deploy
 
 
