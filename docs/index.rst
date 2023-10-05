@@ -11,6 +11,7 @@ Welcome to Omibus's documentation!
    :caption: Contents:
 
    contents/install
+   contents/changelog
    contents/usage
    contents/document
    contents/commit
