@@ -1,5 +1,8 @@
 version: '3.8'
 
+volumes:
+  omibus_local_postgres_data: {}
+
 services:
   django:
     build:
@@ -7,11 +10,26 @@ services:
       dockerfile: ./compose/local/django/Dockerfile
     image: omibus_local_django
     container_name: omibus_local_django
+    depends_on:
+      - postgres
     volumes:
       - .:/app:z
+    env_file:
+      - ./.envs/.local/.postgres
     ports:
       - '8000:8000'
     command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: omibus_local_postgres
+    container_name: omibus_local_postgres
+    volumes:
+      - omibus_local_postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./.envs/.local/.postgres
 
   docs:
     image: omibus_local_docs
