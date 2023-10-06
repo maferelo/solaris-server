@@ -1,6 +1,33 @@
 Commit
 ======================================================================
 
+Setup git with GPG signing
+----------------------------------------------------------------------
+
+On your local machine, if you haven't already done so, setup git with your name and email address::
+
+    git config --global user.name "<your-name>"
+    git config --global user.email "<your-email>"
+
+then, generate a GPG key::
+
+    gpg --full-generate-key
+
+retrieve the key ID::
+
+    gpg --list-secret-keys --keyid-format LONG
+
+get the public key::
+
+    gpg --armor --export <KEY_ID>
+
+configure gpg signing and public key in git::
+
+    git config --global commit.gpgsign true
+    git config --global user.signingkey <KEY_ID>
+
+
+
 Branch naming convention
 ----------------------------------------------------------------------
 
