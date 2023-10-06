@@ -46,6 +46,8 @@ RUN groupadd --gid 1000 dev-user \
 
 # Install required system dependencies
 RUN apt-get update && apt-get install --no-install-recommends -y \
+  # Commits signing dependencies
+  gnupg2 \
   # Heroku CLI dependencies
   curl \
   # psycopg2 dependencies
@@ -61,8 +63,6 @@ RUN curl https://cli-assets.heroku.com/install.sh | sh
 
 # Bash theme
 RUN sudo -u dev-user bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-
-RUN git config --global --add safe.directory /app
 
 # All absolute dir copies ignore workdir instruction. All relative dir copies are wrt to the workdir instruction
 # copy python dependency wheels from python-build-stage
