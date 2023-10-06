@@ -12,6 +12,7 @@ Welcome to Omibus's documentation!
 
    contents/install
    contents/changelog
+   contents/settings
    contents/usage
    contents/document
    contents/commit
