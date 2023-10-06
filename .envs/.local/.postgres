@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=omibus
+POSTGRES_USER=zhWmQMIouwgdJBdXJWfzHUHtquLURwSY
+POSTGRES_PASSWORD=y6bGzsLdDikrFsL3DgkBjzbsse9TGWmnPekhD5O9bkj1LTT6NNH3zcEca8x41kV7
