@@ -12,9 +12,11 @@ services:
     container_name: omibus_local_django
     depends_on:
       - postgres
+      - redis
     volumes:
       - .:/app:z
     env_file:
+      - ./.envs/.local/.django
       - ./.envs/.local/.postgres
     ports:
       - '8000:8000'
@@ -42,3 +44,7 @@ services:
     ports:
       - '9000:9000'
     command: /start-docs
+
+  redis:
+    image: redis:6
+    container_name: solaris_local_redis
