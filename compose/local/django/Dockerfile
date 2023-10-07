@@ -73,7 +73,7 @@ RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
   && rm -rf /wheels/
 
 COPY .pre-commit-config.yaml .
-RUN git init . && PRE_COMMIT_HOME=/home/dev-user/pre-commit pre-commit install-hooks
+RUN git init . && PRE_COMMIT_HOME=/home/dev-user/pre-commit pre-commit install --install-hooks
 
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
