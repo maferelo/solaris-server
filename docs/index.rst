@@ -14,7 +14,9 @@ Welcome to Omibus's documentation!
    contents/changelog
    contents/settings
    contents/usage
+   contents/test
    contents/document
+   contents/lint
    contents/commit
    contents/deploy
 
