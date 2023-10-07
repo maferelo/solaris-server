@@ -72,6 +72,9 @@ COPY --from=python-build-stage /usr/src/app/wheels  /wheels/
 RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
   && rm -rf /wheels/
 
+COPY .pre-commit-config.yaml .
+RUN git init . && pre-commit install-hooks
+
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
 RUN chmod +x /entrypoint
@@ -79,9 +82,6 @@ RUN chmod +x /entrypoint
 COPY ./compose/local/django/start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
-
-COPY .pre-commit-config.yaml .
-RUN git init . && pre-commit install-hooks
 
 # copy application code to WORKDIR
 COPY . ${APP_HOME}
