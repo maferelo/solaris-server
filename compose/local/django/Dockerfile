@@ -80,6 +80,9 @@ COPY ./compose/local/django/start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
 
+COPY .pre-commit-config.yaml .
+RUN git init . && pre-commit install-hooks
+
 # copy application code to WORKDIR
 COPY . ${APP_HOME}
 
