@@ -5,6 +5,13 @@
         "../local.yml"
     ],
     "init": true,
+    "mounts": [
+        {
+            "source": "./.devcontainer/bash_history",
+            "target": "/home/dev-user/.bash_history",
+            "type": "bind"
+        }
+    ],
     // Tells devcontainer.json supporting services / tools whether they should run
     // /bin/sh -c "while sleep 1000; do :; done" when starting the container instead of the container’s default command
     "overrideCommand": false,
@@ -57,11 +64,12 @@
                 "visualstudioexptteam.intellicode-api-usage-examples",
                 "visualstudioexptteam.vscodeintellicode",
                 // python
-                "almenon.arepl",
                 "ms-python.python",
-                "ms-python.vscode-pylance",
-                "ms-python.isort",
+                "almenon.arepl",
                 "ms-python.black-formatter",
+                "ms-python.flake8",
+                "ms-python.isort",
+                "ms-python.vscode-pylance",
                 // django
                 "batisteo.vscode-django"
             ]
