@@ -30,8 +30,6 @@ ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV BUILD_ENV ${BUILD_ENVIRONMENT}
 
-WORKDIR ${APP_HOME}
-
 
 # devcontainer dependencies and utils
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -72,10 +70,16 @@ COPY --from=python-build-stage /usr/src/app/wheels  /wheels/
 RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
   && rm -rf /wheels/
 
+USER dev-user
+
+WORKDIR ${APP_HOME}
+
 COPY .pre-commit-config.yaml .
-RUN git init . && PRE_COMMIT_HOME=/home/dev-user/.cache/pre-commit pre-commit install --install-hooks
-RUN mv .git/hooks /hooks
-RUN chown -R dev-user:dev-user /hooks && chown -R dev-user:dev-user /home/dev-user/.cache/pre-commit
+RUN git init .
+RUN pre-commit install --install-hooks
+RUN mv .git/hooks $HOME
+
+USER root
 
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
