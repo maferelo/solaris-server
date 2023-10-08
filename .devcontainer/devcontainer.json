@@ -76,7 +76,7 @@
         }
     },
     "postCreateCommand": "cat .devcontainer/bashrc.override.sh >> ~/.bashrc",
-    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && cp -r $HOME/hooks /app/.git/hooks && chmod +x /app/.git/hooks/*",
     // Uncomment the next line if you want start specific services in your Docker Compose config.
     "runServices": [
         "docs"
