@@ -17,7 +17,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 COPY ./requirements .
 
 # Create Python Dependency and Sub-Dependency Wheels.
-RUN pip wheel --wheel-dir /usr/src/app/wheels  \
+RUN --mount=type=cache,target=~/.cache \
+  pip wheel --wheel-dir /usr/src/app/wheels  \
   -r ${BUILD_ENVIRONMENT}.txt
 
 # Python 'run' stage
@@ -76,7 +77,8 @@ WORKDIR ${APP_HOME}
 
 COPY .pre-commit-config.yaml .
 RUN git init .
-RUN pre-commit install --install-hooks
+RUN --mount=type=cache,target=~/.cache,uid=1000 \
+  pre-commit install --install-hooks
 RUN mv .git/hooks $HOME
 
 USER root
@@ -88,6 +90,8 @@ RUN chmod +x /entrypoint
 COPY ./compose/local/django/start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
+
+USER dev-user
 
 # copy application code to WORKDIR
 COPY . ${APP_HOME}
