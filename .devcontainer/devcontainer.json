@@ -7,6 +7,11 @@
     "init": true,
     "mounts": [
         {
+            "source": "vscode-extensions",
+            "target": "/home/dev-user/.vscode-server/extensions",
+            "type": "volume"
+        },
+        {
             "source": "./.devcontainer/bash_history",
             "target": "/home/dev-user/.bash_history",
             "type": "bind"

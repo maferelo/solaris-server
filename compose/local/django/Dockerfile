@@ -105,12 +105,11 @@ RUN sed -i 's/\r$//g' /start \
 
 USER dev-user
 
-# dev-user creates this dirs to avoid compose to create them as root
-RUN mkdir -p \
-  /home/dev-user/.vscode-server/extensions \
-  /home/dev-user/.vscode-server/extensionsCache/
-
 # copy application code to WORKDIR
 COPY . ${APP_HOME}
+
+RUN \
+  mkdir -p \
+  /home/dev-user/.vscode-server/extensions
 
 ENTRYPOINT ["/entrypoint"]
