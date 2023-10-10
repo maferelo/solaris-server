@@ -15,6 +15,8 @@ services:
       - redis
     volumes:
       - .:/app:z
+      - /home/dev-user/.vscode-server/extensions/
+      - /home/dev-user/.vscode-server/extensionsCache/
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
