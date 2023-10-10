@@ -19,7 +19,7 @@ WORKDIR /tmp
 COPY ./requirements .
 
 # Create Python Dependency and Sub-Dependency Wheels.
-RUN --mount=type=cache,target=/home/root/.cache/pip \
+RUN --mount=type=cache,target=/root/.cache/pip \
   pip wheel --wheel-dir /usr/src/app/wheels  \
   -r ${BUILD_ENVIRONMENT}.txt
 
