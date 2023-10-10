@@ -9,8 +9,18 @@ https://docs.djangoproject.com/en/4.2/howto/deployment/asgi/
 
 import os
 
+from channels.routing import ProtocolTypeRouter
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "omibus.settings")
+# If DJANGO_SETTINGS_MODULE is unset, default to the local settings
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
 
-application = get_asgi_application()
+# This application object is used by any ASGI server configured to use this file.
+application = ProtocolTypeRouter(
+    {
+        "http": get_asgi_application(),
+    }
+)
+# Apply ASGI middleware here.
+# from helloworld.asgi import HelloWorldApplication
+# application = HelloWorldApplication(application)
