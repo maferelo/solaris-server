@@ -82,8 +82,10 @@ WORKDIR ${APP_HOME}
 
 COPY .pre-commit-config.yaml .
 RUN git init .
-RUN --mount=type=cache,target=/home/dev-user/.cache/pre-commit,uid=1000 \
-  pre-commit install --install-hooks \
+RUN --mount=type=cache,target=/home/dev-user/pre-commit,uid=1000 \
+  cp -r "/home/dev-user/pre-commit" "/home/dev-user/.cache" \
+  && pre-commit install --install-hooks \
+  && cp -r "/home/dev-user/.cache/pre-commit" "/home/dev-user" \
   && mv ".git/hooks" "/home/dev-user"
 
 USER root
