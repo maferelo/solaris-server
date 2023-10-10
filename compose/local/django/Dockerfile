@@ -81,9 +81,14 @@ RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/
 WORKDIR ${APP_HOME}
 
 COPY .pre-commit-config.yaml .
-RUN git init .
+# Install pre-commit hooks
+# Buildkit cache mount is used to speed up the build process
+# https://docs.docker.com/develop/develop-images/build_enhancements/#using-cache-mounts-to-persist-cache-data
+# then environments are persisted in the default pre-commit cache dir
+# for the dev container user
 RUN --mount=type=cache,target=/home/dev-user/pre-commit,uid=1000 \
-  cp -r "/home/dev-user/pre-commit" "/home/dev-user/.cache" \
+  git init . \
+  && cp -r "/home/dev-user/pre-commit" "/home/dev-user/.cache" \
   && pre-commit install --install-hooks \
   && cp -r "/home/dev-user/.cache/pre-commit" "/home/dev-user" \
   && mv ".git/hooks" "/home/dev-user"
