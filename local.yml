@@ -47,4 +47,4 @@ services:
 
   redis:
     image: redis:6
-    container_name: solaris_local_redis
+    container_name: omibus_local_redis
