@@ -19,8 +19,6 @@ class AuthenticationTest(APITestCase):
             reverse("users:sign_up"),
             data={
                 "phone": "+573017839876",
-                "password1": PASSWORD,
-                "password2": PASSWORD,
             },
         )
         user = get_user_model().objects.last()
