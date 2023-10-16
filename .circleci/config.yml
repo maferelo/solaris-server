@@ -21,6 +21,8 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: docker compose -f local.yml build
+      - run: docker compose -f local.yml run --rm django python manage.py migrate
+      - run: docker compose -f local.yml run --rm django python manage.py test
 
   test:
     executor: docker
@@ -29,6 +31,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: docker compose -f local.yml build
+      - run: docker compose -f local.yml run --rm django python manage.py pre-commit run -a
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
