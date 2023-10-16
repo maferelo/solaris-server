@@ -18,17 +18,17 @@ jobs:
     executor: docker
     steps:
       - checkout
-      - run:
-          name: "Run linter"
-          command: "echo Run linter"
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: docker compose -f local.yml build
 
   test:
     executor: docker
     steps:
       - checkout
-      - run:
-          name: "Run tests"
-          command: "echo Run tests"
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: docker compose -f local.yml build
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
