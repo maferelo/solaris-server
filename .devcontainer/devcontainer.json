@@ -28,6 +28,7 @@
         "vscode": {
             "settings": {
                 "editor.formatOnSave": true,
+                "files.insertFinalNewline": true,
                 "[python]": {
                     "analysis.autoImportCompletions": true,
                     "analysis.typeCheckingMode": "basic",
@@ -61,19 +62,27 @@
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
                 "74th.monokai-charcoal-high-contrast",
+                "christian-kohler.path-intellisense",
                 "davidanson.vscode-markdownlint",
                 "eamodio.gitlens",
                 "github.copilot",
+                "github.vscode-github-actions",
+                "github.vscode-pull-request-github",
                 "ivangabriele.vscode-heroku",
+                "markis.code-coverage",
+                "mikestead.dotenv",
                 "mrmlnc.vscode-duplicate",
+                "redhat.vscode-yaml",
                 "visualstudioexptteam.intellicode-api-usage-examples",
                 "visualstudioexptteam.vscodeintellicode",
                 // python
-                "ms-python.python",
                 "almenon.arepl",
+                "kevinrose.vsc-python-indent",
                 "ms-python.black-formatter",
                 "ms-python.flake8",
                 "ms-python.isort",
+                "ms-python.pylint",
+                "ms-python.python",
                 "ms-python.vscode-pylance",
                 // django
                 "batisteo.vscode-django"
