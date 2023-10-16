@@ -32,6 +32,7 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.postgres",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     "django.contrib.admin",
 ]
 
@@ -41,6 +42,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "apps.users",
+    "apps.trips",
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
