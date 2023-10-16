@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 volumes:
   omibus_local_postgres_data: {}
@@ -14,12 +14,12 @@ services:
       - postgres
       - redis
     volumes:
-      - .:/app:z
+      - .:/app:cache
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
     ports:
-      - '8000:8000'
+      - "8000:8000"
     command: /start
 
   postgres:
@@ -42,7 +42,7 @@ services:
     volumes:
       - ./docs:/docs:z
     ports:
-      - '9000:9000'
+      - "9000:9000"
     command: /start-docs
 
   redis:

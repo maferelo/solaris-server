@@ -26,6 +26,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: docker compose -f local.yml build
+      - run: ls -al / && ls -al /app
       - run: docker compose -f local.yml run --rm django python manage.py migrate
       - run: docker compose -f local.yml run --rm django python manage.py test
 
