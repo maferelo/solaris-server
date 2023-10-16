@@ -1,3 +1,6 @@
+.. image:: https://dl.circleci.com/status-badge/img/gh/maferelo/solaris-python/tree/main.svg?style=svg
+        :target: https://dl.circleci.com/status-badge/redirect/gh/maferelo/solaris-python/tree/main
+
 ======
 Omibus
 ======
