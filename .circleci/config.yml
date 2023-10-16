@@ -9,6 +9,11 @@ executors:
     docker:
       - image: cimg/base:2023.09
 
+  ubuntu:
+    machine:
+      image: ubuntu-2204:2023.07.2
+      docker_layer_caching: true
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
@@ -25,7 +30,7 @@ jobs:
       - run: docker compose -f local.yml run --rm django python manage.py test
 
   test:
-    executor: docker
+    executor: ubuntu
     steps:
       - checkout
       - setup_remote_docker:
