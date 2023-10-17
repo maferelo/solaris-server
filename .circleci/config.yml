@@ -27,7 +27,7 @@ jobs:
       - run: rm .dockerignore && docker compose -f ci.yml build
       - run: >-
           docker compose -f ci.yml run --rm django
-          ls -al && sudo -u circleci bash -c "pre-commit run -a"
+          pre-commit run -a
 
   test:
     executor: ubuntu
