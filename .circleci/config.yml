@@ -25,8 +25,8 @@ jobs:
       - checkout
       - run: docker compose -f local.yml build
       - run: ls -al / && ls -al /app
-      - run: docker compose -f local.yml run --rm django python manage.py migrate
-      - run: docker compose -f local.yml run --rm django python manage.py test
+      - run: docker compose -f local.yml run -v .:/app --rm django python manage.py migrate
+      - run: docker compose -f local.yml run -v .:/app --rm django python manage.py test
 
   test:
     executor: ubuntu
