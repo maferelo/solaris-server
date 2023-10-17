@@ -26,8 +26,7 @@ jobs:
       - checkout
       - run: docker compose -f local.yml build
       - run: rm .dockerignore
-      - run: docker compose -f local.yml run --rm django whoami
-      - run: docker compose -f local.yml run --rm django pwd
+      - run: docker compose -f local.yml run --rm django chown -R dev-user:dev-user /app
       - run: docker compose -f local.yml run --rm django ls -al
       - run: docker compose -f local.yml run --rm django id
       - run: docker compose -f local.yml run --rm django cp -r /home/dev-user/hooks /app/.git/hooks
