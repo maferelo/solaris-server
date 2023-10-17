@@ -32,7 +32,7 @@ jobs:
           pre-commit run -a
 
   test:
-    executor: ubuntu
+    executor: docker
     steps:
       - checkout
       - run: docker compose -f local.yml build
