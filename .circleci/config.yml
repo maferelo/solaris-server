@@ -5,12 +5,12 @@ version: 2.1
 # Define single executor for all jobs.
 # See: https://circleci.com/docs/configuration-reference/#executors
 executors:
-  docker:
+  python:
     docker:
       # Specify the execution environment. You can specify an image from Docker Hub or
       # use one of our convenience images from CircleCI's Developer Hub.
       # See: https://circleci.com/docs/configuration-reference/#executor-job
-      - image: cimg/base:2023.09
+      - image: cimg/python:3.11.6
 
   ubuntu:
     machine:
@@ -21,15 +21,21 @@ executors:
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   lint:
-    executor: ubuntu
+    executor: python
     steps:
+      - run: pip install pre-commit
       - checkout
-      - run: docker compose -f ci.yml build
-      - run: git status
-      - run: docker compose -f ci.yml run --rm django git status
-      - run: >-
-          docker compose -f ci.yml run --rm django
-          pre-commit run -a
+      - run: |
+          cp .pre-commit-config.yaml pre-commit-cache-key.txt
+          python --version --version >> pre-commit-cache-key.txt
+      - restore_cache:
+          keys:
+            - v1-pc-cache-{{ checksum "pre-commit-cache-key.txt" }}
+      - run: pre-commit run --all-files
+      - save_cache:
+          key: v1-pc-cache-{{ checksum "pre-commit-cache-key.txt" }}
+          paths:
+            - ~/.cache/pre-commit
 
   test:
     executor: ubuntu
