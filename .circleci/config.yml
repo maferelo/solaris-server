@@ -24,7 +24,7 @@ jobs:
     steps:
       - checkout
       - run: docker compose -f local.yml build
-      - run: docker compose -f local.yml run -v .:/app --rm django python manage.py migrate
+      - run: docker compose -f local.yml run --rm django python manage.py migrate
       - run: docker compose -f local.yml run -v .:/app --rm django python manage.py test
 
   test:
@@ -32,7 +32,7 @@ jobs:
     steps:
       - checkout
       - run: docker compose -f local.yml build
-      - run: docker compose -f local.yml run -v .:/app --rm django python manage.py pre-commit run -a
+      - run: docker compose -f local.yml run -v .:/app --rm django pre-commit run -a
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
