@@ -26,6 +26,11 @@ jobs:
       - checkout
       - run: docker compose -f local.yml build
       - run: rm .dockerignore
+      - run: docker compose -f local.yml run --rm django whoami
+      - run: docker compose -f local.yml run --rm django pwd
+      - run: docker compose -f local.yml run --rm django ls -al
+      - run: docker compose -f local.yml run --rm django git init .
+      - run: docker compose -f local.yml run --rm django ls -al
       - run: >-
           docker compose -f local.yml run --rm django
           git init . &&
