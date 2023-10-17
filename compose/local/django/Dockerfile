@@ -89,7 +89,7 @@ COPY .pre-commit-config.yaml .
 RUN --mount=type=cache,target=/home/dev-user/pre-commit,uid=1000 \
   git init . \
   && cp -r "/home/dev-user/pre-commit" "/home/dev-user/.cache" \
-  && pre-commit install-hooks \
+  && pre-commit install --install-hooks \
   && cp -r "/home/dev-user/.cache/pre-commit" "/home/dev-user" \
   && mv ".git/hooks" "/home/dev-user"
 
