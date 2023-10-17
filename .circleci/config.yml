@@ -42,7 +42,7 @@ jobs:
     steps:
       - checkout
       - run: docker compose -f local.yml build
-      - run: >-
+      - run: |
           docker compose -f local.yml run --rm django
           python manage.py test
 
