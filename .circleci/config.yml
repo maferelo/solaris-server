@@ -25,6 +25,8 @@ jobs:
     steps:
       - checkout
       - run: docker compose -f local.yml build
+      - run: docker compose -f local.yml up -d
+      - run: docker compose -f local.yml images
       - run: docker compose -f local.yml ps
       - run: docker compose -f local.yml cp . django:/app
       - run: >-
