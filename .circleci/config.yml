@@ -21,18 +21,14 @@ executors:
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   lint:
-    executor: ubuntu
+    executor: docker
     steps:
       - checkout
-      - run: docker compose -f local.yml build
-      - run: docker compose -f local.yml up -d
-      - run: docker compose -f local.yml images
       - run: rm .dockerignore
-      - run: docker compose -f local.yml ps
-      - run: docker compose -f local.yml cp . django:/app
+      - run: docker compose -f ci.yml build
       - run: >-
-          docker compose -f local.yml run --rm django
-          sudo pre-commit run -a
+          docker compose -f ci.yml run --rm django
+          pre-commit run -a
 
   test:
     executor: ubuntu
