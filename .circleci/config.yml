@@ -25,6 +25,7 @@ jobs:
     steps:
       - checkout
       - run: docker compose -f local.yml build
+      - run: docker cp omibus_local_django:/app/. .
       - run: >-
           docker compose -f local.yml run --rm django
           sudo pre-commit run -a
