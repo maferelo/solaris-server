@@ -25,7 +25,7 @@ jobs:
     steps:
       - checkout
       - run: docker compose -f ci.yml build
-      - run: docker compose -f ci.yml run -rm git status
+      - run: docker compose -f ci.yml run -rm django git status
       - run: >-
           docker compose -f ci.yml run --rm django
           pre-commit run -a
