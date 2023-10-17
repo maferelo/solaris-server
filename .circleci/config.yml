@@ -23,8 +23,8 @@ jobs:
   lint:
     executor: python
     steps:
-      - run: pip install pre-commit
       - checkout
+      - run: pip install pre-commit
       - run: |
           cp .pre-commit-config.yaml pre-commit-cache-key.txt
           python --version --version >> pre-commit-cache-key.txt
