@@ -49,5 +49,8 @@ jobs:
       - name: Run Django Tests
         run: docker compose -f local.yml run --rm django python manage.py test
 
+      - name: Run Django Tefsts
+        run: docker compose -f local.yml run --rm django pre-commit run --all-files
+
       - name: Tear down the Stack
         run: docker compose -f local.yml down
