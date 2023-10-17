@@ -24,6 +24,7 @@ jobs:
     steps:
       - checkout
       - run: docker compose -f local.yml build
+      - run: rm .dockerignore
       - run: docker compose -f local.yml run --rm django pre-commit run -a
 
   test:
