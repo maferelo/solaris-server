@@ -30,8 +30,6 @@ jobs:
       - run: docker compose -f ci.yml run --rm django id
       - run: docker compose -f ci.yml run --rm django cp -r /home/dev-user/hooks /app/.git/hooks
       - run: docker compose -f ci.yml run --rm django ls -al
-      - run: docker compose -f ci.yml run --rm django chmod +x /app/.git/hooks/*
-      - run: docker compose -f ci.yml run --rm django ls -al
       - run: docker compose -f ci.yml run --rm django pre-commit run -a
 
   test:
