@@ -25,7 +25,7 @@ jobs:
     steps:
       - checkout
       - run: docker compose -f ci.yml build
-      - run: docker compose -f ci.yml run --rm django pre-commit run -a
+      - run: docker compose -f ci.yml run --rm django pre-commit run -a --from-ref HEAD^^^ --to-ref HEAD
 
   test:
     executor: ubuntu
