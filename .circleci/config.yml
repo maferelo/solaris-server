@@ -32,7 +32,6 @@ jobs:
     steps:
       - checkout
       - run: docker compose -f local.yml build
-      - run: docker compose -f local.yml run --rm django python manage.py migrate
       - run: docker compose -f local.yml run --rm django python manage.py test
 
 # Orchestrate jobs using workflows
