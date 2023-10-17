@@ -26,7 +26,6 @@ jobs:
       - checkout
       - run: docker compose -f ci.yml build
       - run: rm .dockerignore
-      - run: docker compose -f ci.yml run --rm django chown -R dev-user:dev-user /app
       - run: docker compose -f ci.yml run --rm django ls -al
       - run: docker compose -f ci.yml run --rm django id
       - run: docker compose -f ci.yml run --rm django cp -r /home/dev-user/hooks /app/.git/hooks
