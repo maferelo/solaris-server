@@ -24,10 +24,11 @@ jobs:
     executor: ubuntu
     steps:
       - checkout
-      - run: docker compose -f local.yml build
+      - run: docker compose -f ci.yml build
+      - run: docker compose -f ci.yml run -rm git status
       - run: >-
-          docker compose -f local.yml run --rm django
-          sudo pre-commit run -a
+          docker compose -f ci.yml run --rm django
+          pre-commit run -a
 
   test:
     executor: ubuntu
