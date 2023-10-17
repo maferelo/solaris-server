@@ -7,6 +7,8 @@ version: 2.1
 executors:
   docker:
     docker:
+      # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+      # See: https://circleci.com/docs/configuration-reference/#executor-job
       - image: cimg/base:2023.09
 
   ubuntu:
@@ -18,21 +20,19 @@ executors:
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   lint:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#executor-job
     executor: ubuntu
     steps:
       - checkout
       - run: docker compose -f local.yml build
-      - run: docker compose -f local.yml run --rm django python manage.py migrate
-      - run: docker compose -f local.yml run -v .:/app --rm django python manage.py test
+      - run: docker compose -f local.yml run --rm django pre-commit run -a
 
   test:
     executor: ubuntu
     steps:
       - checkout
       - run: docker compose -f local.yml build
-      - run: docker compose -f local.yml run -v .:/app --rm django pre-commit run -a
+      - run: docker compose -f local.yml run --rm django python manage.py migrate
+      - run: docker compose -f local.yml run --rm django python manage.py test
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
