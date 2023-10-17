@@ -28,7 +28,10 @@ jobs:
       - run: rm .dockerignore
       - run: >-
           docker compose -f local.yml run --rm django
-          git init . && cp -r /home/dev-user/hooks /app/.git/hooks && pre-commit run -a
+          git init . &&
+          cp -r /home/dev-user/hooks /app/.git/hooks &&
+          chmod +x /app/.git/hooks/* &&
+          pre-commit run -a
 
   test:
     executor: ubuntu
