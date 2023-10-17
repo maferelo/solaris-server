@@ -24,13 +24,9 @@ jobs:
     executor: ubuntu
     steps:
       - checkout
-      - run: docker compose -f ci.yml build
-      - run: docker compose -f ci.yml run --rm django ls -al
-      - run: docker compose -f ci.yml run --rm django ls -al /app
-      - run: docker compose -f ci.yml run --rm django ls -al /app/.git
-      - run: docker compose -f ci.yml run --rm django which pre-commit
+      - run: docker compose -f local.yml build
       - run: >-
-          docker compose -f ci.yml run --rm django
+          docker compose -f local.yml run --rm django
           sudo pre-commit run -a
 
   test:
