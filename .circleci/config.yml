@@ -21,22 +21,18 @@ executors:
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   lint:
-    executor: docker
+    executor: ubuntu
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run: docker compose -f ci.yml build
       - run: >-
           docker compose -f ci.yml run --rm django
           pre-commit run -a
 
   test:
-    executor: docker
+    executor: ubuntu
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run: docker compose -f local.yml build
       - run: >-
           docker compose -f local.yml run --rm django
