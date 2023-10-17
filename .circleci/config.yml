@@ -31,8 +31,13 @@ jobs:
           git init . &&
           cp -r /home/dev-user/hooks /app/.git/hooks &&
           ls -al . && pwd && whoami && chown -R dev-user:dev-user .git/ &&
-          chmod +x /app/.git/hooks/* &&
-          pre-commit run -a
+          cp -r /home/dev-user/hooks /app/.git/hooks
+      - run: >-
+          docker compose -f local.yml run --rm django
+          git init . &&
+          cp -r /home/dev-user/hooks /app/.git/hooks &&
+          ls -al . && pwd && whoami && chown -R dev-user:dev-user .git/ &&
+          chmod +x /app/.git/hooks/* && pre-commit run -a
 
   test:
     executor: ubuntu
