@@ -29,7 +29,7 @@ jobs:
       - run: docker compose -f ci.yml run --rm django ls -al /app
       - run: docker compose -f ci.yml run --rm django ls -al /app/.git
       - run: docker compose -f ci.yml run --rm django which pre-commit
-      - run: docker compose -f ci.yml run --rm django chown -R root:root /app
+      - run: docker compose -f ci.yml run --rm django chown -R root:root /app/.git
       - run: >-
           docker compose -f ci.yml run --rm django
           pre-commit run -a
