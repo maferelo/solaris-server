@@ -30,7 +30,7 @@ To run in a detached (background) mode, just::
 
     $ docker compose -f local.yml up -d
 
-The site should start and be accessible at http://localhost:8000.
+The site should start and be accessible at http://localhost:8000/api/docs.
 
 Execute Management Commands
 ---------------------------
