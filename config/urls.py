@@ -27,7 +27,7 @@ urlpatterns += [
     # API base url
     path("api/", include("apps.users.urls", namespace="users")),
     # Apps
-    path("api/trips/", include("apps.trips.urls", namespace="trips")),
+    path("api/trip/", include("apps.trips.urls", namespace="trip")),
     # Swagger
     path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
     path("api/docs/", SpectacularSwaggerView.as_view(url_name="api-schema"), name="api-docs"),
