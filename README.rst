@@ -43,16 +43,3 @@ To contribute to omibus:
 
 * Check out <https://docs.omibusproject.com/en/dev/internals/contributing/> for
   information about getting involved.
-
-To run omibus's test suite:
-
-* Follow the instructions in the "Unit tests" section of
-  ``docs/internals/contributing/writing-code/unit-tests.txt``, published online at
-  <https://docs.omibusproject.com/en/dev/internals/contributing/writing-code/unit-tests/#running-the-unit-tests>
-
-Supporting the Development of omibus
-====================================
-
-omibus's development depends on your contributions.
-
-If you depend on omibus, remember to support the omibus Software Foundation: <https://www.omibusproject.com/fundraising/>
