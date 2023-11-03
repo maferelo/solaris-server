@@ -14,6 +14,7 @@ from django.core.asgi import get_asgi_application
 from django.urls import path
 
 from apps.trips.consumers import TripsConsumer
+from apps.trips.middleware import TokenAuthMiddlewareStack
 
 # If DJANGO_SETTINGS_MODULE is unset, default to the local settings
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
@@ -22,10 +23,12 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
 application = ProtocolTypeRouter(
     {
         "http": get_asgi_application(),
-        "websocket": URLRouter(
-            [
-                path("trip/", TripsConsumer.as_asgi()),
-            ]
+        "websocket": TokenAuthMiddlewareStack(
+            URLRouter(
+                [
+                    path("trip/", TripsConsumer.as_asgi()),
+                ]
+            )
         ),
     },
 )
