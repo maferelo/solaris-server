@@ -8,8 +8,8 @@ services:
     build:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
-    image: omibus_local_django
-    container_name: omibus_local_django
+    image: omibus_ci_django
+    container_name: omibus_ci_django
     depends_on:
       - postgres
       - redis
