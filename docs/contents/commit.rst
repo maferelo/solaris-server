@@ -1,7 +1,7 @@
 Commit
 ======================================================================
 
-Setup git with GPG signing
+Setup git with GPG signing (optional)
 ----------------------------------------------------------------------
 
 On your local machine, if you haven't already done so, setup git with your name and email address::
