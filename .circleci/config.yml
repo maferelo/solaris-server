@@ -46,7 +46,7 @@ jobs:
           docker compose -f local.yml run --rm django
           pytest
       - run: >-
-          docker compose -f local.yml run --rm django
+          docker compose -f ci.yml run --rm django
           sudo git init . && pre-commit run -a
 
 # Orchestrate jobs using workflows
