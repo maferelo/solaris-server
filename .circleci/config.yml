@@ -48,7 +48,7 @@ jobs:
       - run: docker compose -f ci.yml build
       - run: >-
           docker compose -f ci.yml run --rm django
-          PRE_COMMIT_HOME=/app/.pre-commit pre-commit run -a
+          pre-commit run -a
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
