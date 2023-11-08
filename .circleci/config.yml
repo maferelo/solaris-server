@@ -47,7 +47,7 @@ jobs:
           pytest
       - run: >-
           docker compose -f ci.yml run --rm django
-          sudo git init . && pre-commit run -a
+          pre-commit run -a
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
