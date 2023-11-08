@@ -48,7 +48,7 @@ jobs:
       - run: docker compose -f ci.yml build
       - run: >-
           docker compose -f ci.yml run --rm django
-          ls -al
+          git status
       - run: >-
           docker compose -f ci.yml run --rm django
           pre-commit run
