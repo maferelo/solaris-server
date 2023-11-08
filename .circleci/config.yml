@@ -48,7 +48,10 @@ jobs:
       - run: docker compose -f ci.yml build
       - run: >-
           docker compose -f ci.yml run --rm django
-          ls -al && pre-commit run
+          ls -al
+      - run: >-
+          docker compose -f ci.yml run --rm django
+          pre-commit run
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
