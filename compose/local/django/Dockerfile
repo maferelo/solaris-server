@@ -1,5 +1,5 @@
 # define an alias for the specific python version used in this file.
-FROM python:3.11.5-slim-bullseye as python
+FROM python:3.11.5-slim-bookworm as python
 
 # Python build stage
 FROM python as python-build-stage
@@ -48,6 +48,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   gnupg2 \
   # Heroku CLI dependencies
   curl \
+  nodejs \
   # psycopg2 dependencies
   libpq-dev \
   # Translations dependencies
