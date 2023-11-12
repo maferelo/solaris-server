@@ -50,7 +50,7 @@ jobs:
           ls -al /app
       - run: >-
           docker compose -f local.yml run --rm django
-          git config --global --add safe.directory /app && git status
+          git config --global --add safe.directory /app && pwd
       - run: >-
           docker compose -f ci.yml run --rm django
           git config --global --add safe.directory /app && pwd && whoami && pre-commit run -a
