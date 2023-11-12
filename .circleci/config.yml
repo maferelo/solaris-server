@@ -39,7 +39,7 @@ jobs:
             - ~/.cache/pre-commit
 
   test:
-    executor: python
+    executor: ubuntu
     steps:
       - checkout
       - run: docker compose -f local.yml build
