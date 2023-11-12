@@ -50,7 +50,7 @@ jobs:
           ls -al /app
       - run: >-
           docker compose -f local.yml run --rm django
-          git config --global --add safe.directory /app && pwd && whoami
+          git config --global --add safe.directory /app && pwd && whoami && sudo pre-commit run --all-files
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
