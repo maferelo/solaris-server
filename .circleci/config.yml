@@ -46,6 +46,9 @@ jobs:
           docker compose -f local.yml run --rm django
           pytest
       - run: >-
+          docker compose -f local.yml run --rm django
+          ls -al /app
+      - run: >-
           docker compose -f ci.yml run --rm django
           pre-commit run -a
 
