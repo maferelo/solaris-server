@@ -16,12 +16,12 @@ TEST_CHANNEL_LAYERS = {
 
 
 @database_sync_to_async
-def create_user(phone, password, group='rider'):
+def create_user(phone, password, group="rider"):
     # Create user.
     user = get_user_model().objects.create_user(phone=phone, password=password)
 
     # Create user group.
-    user_group, _ = Group.objects.get_or_create(name=group) # new
+    user_group, _ = Group.objects.get_or_create(name=group)  # new
     user.groups.add(user_group)
     user.save()
 
@@ -79,20 +79,15 @@ class TestWebSocket:
 
     async def test_join_driver_pool(self, settings):
         settings.CHANNEL_LAYERS = TEST_CHANNEL_LAYERS
-        _, access = await create_user(
-            "+000000000", 'pAssw0rd', 'driver'
-        )
-        communicator = WebsocketCommunicator(
-            application=application,
-            path=f'/trip/?token={access}'
-        )
+        _, access = await create_user("+000000000", "pAssw0rd", "driver")
+        communicator = WebsocketCommunicator(application=application, path=f"/trip/?token={access}")
         await communicator.connect()
         message = {
-            'type': 'echo.message',
-            'data': 'This is a test message.',
+            "type": "echo.message",
+            "data": "This is a test message.",
         }
         channel_layer = get_channel_layer()
-        await channel_layer.group_send('drivers', message=message)
+        await channel_layer.group_send("drivers", message=message)
         response = await communicator.receive_json_from()
         assert response == message
         await communicator.disconnect()
