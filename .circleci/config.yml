@@ -53,7 +53,7 @@ jobs:
           git config --global --add safe.directory /app && git status
       - run: >-
           docker compose -f ci.yml run --rm django
-          git config --global --add safe.directory /app && git status && python -m pre-commit install && pre-commit run -a
+          git config --global --add safe.directory /app && git status && pwd && whoami && pre-commit run -a
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
