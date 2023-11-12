@@ -11,6 +11,7 @@ executors:
       # use one of our convenience images from CircleCI's Developer Hub.
       # See: https://circleci.com/docs/configuration-reference/#executor-job
       - image: cimg/python:3.11.6
+        user: dev-user
 
   ubuntu:
     machine:
