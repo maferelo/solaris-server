@@ -86,12 +86,9 @@ COPY .pre-commit-config.yaml .
 # https://docs.docker.com/develop/develop-images/build_enhancements/#using-cache-mounts-to-persist-cache-data
 # then environments are persisted in the default pre-commit cache dir
 # for the dev container user
-RUN --mount=type=cache,target=/home/dev-user/pre-commit,uid=1000 \
+RUN \
   git init . \
-  && cp -r "/home/dev-user/pre-commit" "/home/dev-user/.cache" \
-  && pre-commit install --install-hooks \
-  && cp -r "/home/dev-user/.cache/pre-commit" "/home/dev-user" \
-  && mv ".git/hooks" "/home/dev-user"
+  && pre-commit install --install-hooks
 
 USER root
 
