@@ -8,7 +8,10 @@ import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
+APPS_DIR = BASE_DIR / "apps"
 env = environ.Env()
+
+env.read_env(str(BASE_DIR / ".env"))
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 ASGI_APPLICATION = "config.asgi.application"
