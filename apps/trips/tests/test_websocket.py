@@ -157,8 +157,6 @@ class TestWebSocket:
 
         # Rider receives message.
         response = await communicator.receive_json_from()
-        print(response)
-        print(message)
         assert response == message
 
         await communicator.disconnect()
