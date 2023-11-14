@@ -2,6 +2,7 @@ import base64
 import json
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
@@ -9,8 +10,12 @@ from rest_framework.test import APITestCase
 PASSWORD = "pAssw0rd!"
 
 
-def create_user(phone="+3017839876", password=PASSWORD):
-    return get_user_model().objects.create_user(phone=phone, password=password)
+def create_user(phone="+3017839876", password=PASSWORD, group_name="rider"):
+    group, _ = Group.objects.get_or_create(name=group_name)
+    user = get_user_model().objects.create_user(phone=phone, password=password)
+    user.groups.add(group)
+    user.save()
+    return user
 
 
 class AuthenticationTest(APITestCase):
@@ -19,6 +24,7 @@ class AuthenticationTest(APITestCase):
             reverse("users:sign_up"),
             data={
                 "phone": "+573017839876",
+                "group": "rider",
             },
         )
         user = get_user_model().objects.last()

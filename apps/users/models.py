@@ -44,3 +44,8 @@ class User(AbstractUser):
 
     USERNAME_FIELD = "phone"
     REQUIRED_FIELDS = []
+
+    @property
+    def group(self):
+        groups = self.groups.all()
+        return groups[0].name if groups else None
