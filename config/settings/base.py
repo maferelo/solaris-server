@@ -40,14 +40,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
 # LOCALE_PATHS = [str(BASE_DIR / "locale")]
 
-# https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
-ASGI_APPLICATION = "config.asgi.application"
-
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {"default": env.db("DATABASE_URL")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
+# https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# URLS
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
+ROOT_URLCONF = "config.urls"
+# https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
+ASGI_APPLICATION = "config.asgi.application"
 
 # APPS
 # ------------------------------------------------------------------------------
@@ -111,6 +117,34 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
+
+MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+]
+
+# SECURITY
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-httponly
+SESSION_COOKIE_HTTPONLY = True
+# https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-httponly
+CSRF_COOKIE_HTTPONLY = True
+# https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
+X_FRAME_OPTIONS = "DENY"
+
+# ADMIN
+# ------------------------------------------------------------------------------
+# Django Admin URL.
+ADMIN_URL = "admin/"
+# https://docs.djangoproject.com/en/dev/ref/settings/#admins
+ADMINS = [("""Felipe Restrepo""", "maferelo@outlook.com")]
+# https://docs.djangoproject.com/en/dev/ref/settings/#managers
+MANAGERS = ADMINS
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
