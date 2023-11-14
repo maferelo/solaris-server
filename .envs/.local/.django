@@ -1,3 +1,5 @@
 # Redis
 # ------------------------------------------------------------------------------
 REDIS_URL=redis://redis:6379/0
+DJANGO_SUPERUSER_PHONE=+000000000000
+DJANGO_SUPERUSER_PASSWORD=admin

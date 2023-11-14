@@ -11,3 +11,6 @@ docs/_build/
 ### macOS template
 # General
 *.DS_Store
+
+# Environments
+.env

@@ -1,100 +1,96 @@
 // For format details, see https://containers.dev/implementors/json_reference/
 {
-    "name": "solaris_dev",
-    "dockerComposeFile": [
-        "../local.yml"
-    ],
-    "init": true,
-    "mounts": [
-        {
-            "source": "vscode-extensions",
-            "target": "/home/dev-user/.vscode-server/extensions",
-            "type": "volume"
-        },
-        {
-            "source": "./.devcontainer/bash_history",
-            "target": "/home/dev-user/.bash_history",
-            "type": "bind"
-        }
-    ],
-    // Tells devcontainer.json supporting services / tools whether they should run
-    // /bin/sh -c "while sleep 1000; do :; done" when starting the container instead of the container’s default command
-    "overrideCommand": false,
-    "service": "django",
-    "remoteUser": "dev-user",
-    "workspaceFolder": "/app",
-    // Set *default* container specific settings.json values on container create.
-    "customizations": {
-        "vscode": {
-            "settings": {
-                "editor.formatOnSave": true,
-                "files.insertFinalNewline": true,
-                "files.trimTrailingWhitespace": true,
-                "[python]": {
-                    "analysis.autoImportCompletions": true,
-                    "analysis.typeCheckingMode": "basic",
-                    "defaultInterpreterPath": "/usr/local/bin/python",
-                    "editor.codeActionsOnSave": {
-                        "source.organizeImports": true
-                    },
-                    // Uncomment when fixed
-                    // https://github.com/microsoft/vscode-remote-release/issues/8474
-                    // "editor.defaultFormatter": "ms-python.black-formatter",
-                    "formatting.blackPath": "/usr/local/bin/black",
-                    "formatting.provider": "black",
-                    "languageServer": "Pylance",
-                    // "linting.banditPath": "/usr/local/py-utils/bin/bandit",
-                    "linting.enabled": true,
-                    "linting.flake8Enabled": true,
-                    "linting.flake8Path": "/usr/local/bin/flake8",
-                    "linting.mypyEnabled": true,
-                    "linting.mypyPath": "/usr/local/bin/mypy",
-                    "linting.pycodestylePath": "/usr/local/bin/pycodestyle",
-                    // "linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
-                    "linting.pylintEnabled": true,
-                    "linting.pylintPath": "/usr/local/bin/pylint"
-                },
-                "workbench.colorCustomizations": {
-                    "titleBar.activeBackground": "#FF00FF",
-                    "titleBar.activeForeground": "#ffffff"
-                }
-            },
-            // https://code.visualstudio.com/docs/remote/devcontainerjson-reference#_vs-code-specific-properties
-            // Add the IDs of extensions you want installed when the container is created.
-            "extensions": [
-                "74th.monokai-charcoal-high-contrast",
-                "christian-kohler.path-intellisense",
-                "circleci.circleci",
-                "davidanson.vscode-markdownlint",
-                "eamodio.gitlens",
-                "github.copilot",
-                "github.vscode-github-actions",
-                "github.vscode-pull-request-github",
-                "ivangabriele.vscode-heroku",
-                "markis.code-coverage",
-                "mikestead.dotenv",
-                "mrmlnc.vscode-duplicate",
-                "redhat.vscode-yaml",
-                "visualstudioexptteam.intellicode-api-usage-examples",
-                "visualstudioexptteam.vscodeintellicode",
-                // python
-                "almenon.arepl",
-                "kevinrose.vsc-python-indent",
-                "ms-python.black-formatter",
-                "ms-python.flake8",
-                "ms-python.isort",
-                "ms-python.pylint",
-                "ms-python.python",
-                "ms-python.vscode-pylance",
-                // django
-                "batisteo.vscode-django"
-            ]
-        }
+  "name": "solaris_dev",
+  "dockerComposeFile": ["../local.yml"],
+  "init": true,
+  "mounts": [
+    {
+      "source": "vscode-extensions",
+      "target": "/home/dev-user/.vscode-server/extensions",
+      "type": "volume"
     },
-    "postCreateCommand": "cat .devcontainer/bashrc.override.sh >> ~/.bashrc",
-    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && cp -r /home/dev-user/hooks /app/.git/hooks && chmod +x /app/.git/hooks/*",
-    // Uncomment the next line if you want start specific services in your Docker Compose config.
-    "runServices": [
-        "docs"
-    ]
+    {
+      "source": "./.devcontainer/bash_history",
+      "target": "/home/dev-user/.bash_history",
+      "type": "bind"
+    }
+  ],
+  // Tells devcontainer.json supporting services / tools whether they should run
+  // /bin/sh -c "while sleep 1000; do :; done" when starting the container instead of the container’s default command
+  "overrideCommand": false,
+  "service": "django",
+  "remoteUser": "dev-user",
+  "workspaceFolder": "/app",
+  // Set *default* container specific settings.json values on container create.
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true,
+        "[python]": {
+          "analysis.autoImportCompletions": true,
+          "analysis.typeCheckingMode": "basic",
+          "defaultInterpreterPath": "/usr/local/bin/python",
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+          },
+          // Uncomment when fixed
+          // https://github.com/microsoft/vscode-remote-release/issues/8474
+          // "editor.defaultFormatter": "ms-python.black-formatter",
+          "formatting.blackPath": "/usr/local/bin/black",
+          "formatting.provider": "black",
+          "languageServer": "Pylance",
+          // "linting.banditPath": "/usr/local/py-utils/bin/bandit",
+          "linting.enabled": true,
+          "linting.flake8Enabled": true,
+          "linting.flake8Path": "/usr/local/bin/flake8",
+          "linting.mypyEnabled": true,
+          "linting.mypyPath": "/usr/local/bin/mypy",
+          "linting.pycodestylePath": "/usr/local/bin/pycodestyle",
+          // "linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
+          "linting.pylintEnabled": true,
+          "linting.pylintPath": "/usr/local/bin/pylint"
+        },
+        "workbench.colorCustomizations": {
+          "titleBar.activeBackground": "#FF00FF",
+          "titleBar.activeForeground": "#ffffff"
+        }
+      },
+      // https://code.visualstudio.com/docs/remote/devcontainerjson-reference#_vs-code-specific-properties
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "74th.monokai-charcoal-high-contrast",
+        "christian-kohler.path-intellisense",
+        "circleci.circleci",
+        "davidanson.vscode-markdownlint",
+        "eamodio.gitlens",
+        "github.copilot",
+        "github.vscode-github-actions",
+        "github.vscode-pull-request-github",
+        "ivangabriele.vscode-heroku",
+        "markis.code-coverage",
+        "mikestead.dotenv",
+        "mrmlnc.vscode-duplicate",
+        "redhat.vscode-yaml",
+        "visualstudioexptteam.intellicode-api-usage-examples",
+        "visualstudioexptteam.vscodeintellicode",
+        // python
+        "almenon.arepl",
+        "kevinrose.vsc-python-indent",
+        "ms-python.black-formatter",
+        "ms-python.flake8",
+        "ms-python.isort",
+        "ms-python.pylint",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        // django
+        "batisteo.vscode-django"
+      ]
+    }
+  },
+  "postCreateCommand": "cat .devcontainer/bashrc.override.sh >> ~/.bashrc",
+  "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && cp -r /home/dev-user/hooks /app/.git/hooks && chmod +x /app/.git/hooks/*",
+  // Uncomment the next line if you want start specific services in your Docker Compose config.
+  "runServices": ["docs"]
 }
