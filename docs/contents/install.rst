@@ -30,7 +30,14 @@ To run in a detached (background) mode, just::
 
     $ docker compose -f local.yml up -d
 
-The site should start and be accessible at http://localhost:8000/api/docs.
+By default a superuser is created with the following credentials::
+
+    phone: +000000000000
+    password: admin
+
+Login to the Django Admin at http://localhost:8000/admin/ and change the password.
+
+The site should be accessible at http://localhost:8000/api/docs.
 
 Execute Management Commands
 ---------------------------
