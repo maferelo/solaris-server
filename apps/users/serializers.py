@@ -9,16 +9,17 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         group_data = validated_data.pop("group")
+        photo_data = validated_data.pop("photo", None)
         group, _ = Group.objects.get_or_create(name=group_data)
-        return self.Meta.model.objects.create_user(**validated_data)
+        user = self.Meta.model.objects.create_user(**validated_data)
+        user.groups.add(group)
+        user.photo = photo_data
+        user.save()
+        return user
 
     class Meta:
         model = get_user_model()
-        fields = (
-            "id",
-            "phone",
-            "group",
-        )
+        fields = ("id", "phone", "group", "photo")
         read_only_fields = ("id",)
 
 
