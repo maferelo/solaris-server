@@ -1,6 +1,8 @@
 from rest_framework import serializers
-from .models import Trip
+
 from omibus.users.serializers import UserSerializer
+
+from .models import Trip
 
 
 class TripSerializer(serializers.ModelSerializer):

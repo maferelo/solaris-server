@@ -1,8 +1,7 @@
+import phonenumbers
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from rest_framework import serializers
-import phonenumbers
-
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -52,8 +51,8 @@ class CodeSerializer(serializers.CharField):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.validators.append(self._validate_code)
-        
-        
+
+
 class SendCodeSerializer(serializers.Serializer):
     phone = PhoneSerializer()
 
@@ -61,5 +60,3 @@ class SendCodeSerializer(serializers.Serializer):
 class LogInSerializer(serializers.Serializer):
     phone = PhoneSerializer()
     code = CodeSerializer()
-
-

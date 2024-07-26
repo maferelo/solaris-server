@@ -1,15 +1,15 @@
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework.response import Response
+from celery.exceptions import CeleryError
+from django.contrib.auth import authenticate
+from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import AllowAny
-from drf_spectacular.utils import extend_schema
-from django.contrib.auth import authenticate
-from twilio.base.exceptions import TwilioRestException
-from celery.exceptions import CeleryError
-
-from .serializers import SendCodeSerializer, LogInSerializer
-from .tasks import send_code
+from rest_framework.response import Response
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
+from twilio.base.exceptions import TwilioRestException
+
+from .serializers import LogInSerializer, SendCodeSerializer
+from .tasks import send_code
 
 
 @extend_schema(request=SendCodeSerializer)
@@ -35,13 +35,18 @@ def log_in_view(request):
     serializer = LogInSerializer(data=request.data)
     if serializer.is_valid():
         try:
-            user = authenticate(phone=serializer.validated_data.get("phone"), code=serializer.validated_data.get("code"))
+            user = authenticate(
+                phone=serializer.validated_data.get("phone"), code=serializer.validated_data.get("code")
+            )
         except TwilioRestException:
             return Response({"detail": "Invalid OTP"}, status=400)
 
         refresh = RefreshToken.for_user(user)
-        return Response({
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
-        }, status=200)
+        return Response(
+            {
+                "refresh": str(refresh),
+                "access": str(refresh.access_token),
+            },
+            status=200,
+        )
     return Response(serializer.errors, status=400)

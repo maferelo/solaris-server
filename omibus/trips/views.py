@@ -1,5 +1,6 @@
 from django.db.models import Q
 from rest_framework import permissions, viewsets
+
 from .models import Trip
 from .serializers import NestedTripSerializer
 

@@ -1,7 +1,7 @@
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from .views import send_code_view, log_in_view
+from .views import log_in_view, send_code_view
 
 app_name = "users"
 urlpatterns = [
