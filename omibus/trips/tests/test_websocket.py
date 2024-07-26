@@ -5,9 +5,10 @@ from channels.testing import WebsocketCommunicator
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from rest_framework_simplejwt.tokens import AccessToken
-from trips.models import Trip
 
 from config.asgi import application
+
+from ..models import Trip
 
 TEST_CHANNEL_LAYERS = {
     "default": {
