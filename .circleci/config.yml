@@ -14,7 +14,7 @@ executors:
 
   ubuntu:
     machine:
-      image: ubuntu-2204:2023.07.2
+      image: ubuntu-2204:2024.05.1
       docker_layer_caching: true
 
 # Define a job to be invoked later in a workflow.
