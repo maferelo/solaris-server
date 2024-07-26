@@ -1,20 +1,21 @@
-psycopg[c]==3.1.12  # https://github.com/psycopg/psycopg
-argon2-cffi==23.1.0  # https://github.com/hynek/argon2_cffi
-Pillow==10.1.0 # https://github.com/python-pillow/Pillow
-daphne==4.0.0 # https://github.com/django/daphne
-redis==5.0.1  # https://github.com/redis/redis-py
-channels-redis==4.1.0  # https://github.com/django/channels_redis
-django-celery-beat==2.5.0  # https://github.com/celery/django-celery-beat
-flower==2.0.1  # https://github.com/mher/flower
-
-# Django
-# ------------------------------------------------------------------------------
-django==4.2.6  # pyup: < 5.0  # https://www.djangoproject.com/
-django-environ==0.11.2  # https://github.com/joke2k/django-environ
-django-redis==5.3.0  # https://github.com/jazzband/django-redis
-channels==4.0.0  # https://github.com/django/channels
-# Django REST Framework
-djangorestframework==3.14.0  # https://github.com/encode/django-rest-framework
-djangorestframework-simplejwt==5.3.0  # https://github.com/jazzband/djangorestframework-simplejwt
-# DRF-spectacular for api documentation
-drf-spectacular==0.26.5  # https://github.com/tfranzel/drf-spectacular
+argon2-cffi==23.1.0
+celery==5.4.0
+channels-redis==4.1.0
+channels==4.0.0
+daphne==4.0.0
+django-celery-beat==2.5.0
+django-environ==0.11.2
+django-redis==5.3.0
+django==4.2.9
+djangorestframework-simplejwt==5.3.0
+djangorestframework==3.14.0
+drf-spectacular==0.26.5
+flower==2.0.1
+phonenumbers==8.13.40
+Pillow==10.1.0
+redis==5.0.1
+twilio==9.2.3
+twisted[tls,http2]==24.3.0
+whitenoise==6.7.0
+uvicorn[standard]==0.30.3
+uvicorn-worker==0.2.0

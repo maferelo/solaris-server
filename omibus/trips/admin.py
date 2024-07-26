@@ -1,5 +1,5 @@
 from django.contrib import admin
-from trips.models import Trip
+from .models import Trip
 
 
 @admin.register(Trip)

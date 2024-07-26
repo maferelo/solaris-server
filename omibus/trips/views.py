@@ -1,7 +1,7 @@
 from django.db.models import Q
 from rest_framework import permissions, viewsets
-from trips.models import Trip
-from trips.serializers import NestedTripSerializer
+from .models import Trip
+from .serializers import NestedTripSerializer
 
 
 class TripView(viewsets.ReadOnlyModelViewSet):

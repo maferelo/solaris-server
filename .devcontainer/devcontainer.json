@@ -1,7 +1,7 @@
 // For format details, see https://containers.dev/implementors/json_reference/
 {
   "name": "solaris_dev",
-  "dockerComposeFile": ["../local.yml"],
+  "dockerComposeFile": ["../docker-compose.local.yml"],
   "init": true,
   "mounts": [
     {

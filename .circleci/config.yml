@@ -41,9 +41,9 @@ jobs:
     executor: ubuntu
     steps:
       - checkout
-      - run: docker compose -f local.yml build
+      - run: docker compose -f docker-compose.local.yml build
       - run: >-
-          docker compose -f local.yml run --rm django
+          docker compose -f docker-compose.local.yml run --rm django
           pytest
 
 # Orchestrate jobs using workflows

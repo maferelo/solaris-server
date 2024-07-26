@@ -1,17 +1,22 @@
 # define an alias for the specific python version used in this file.
-FROM python:3.11.5-slim-bookworm as python
+FROM python:3.11.5-slim-bookworm AS python
 
 # Python build stage
-FROM python as python-build-stage
+FROM python AS python-build-stage
 
 ARG BUILD_ENVIRONMENT=local
+
+ENV PYTHONDONTWRITEBYTECODE=1
 
 # Install apt packages
 RUN apt-get update && apt-get install --no-install-recommends -y \
   # dependencies for building Python packages
   build-essential \
   # psycopg2 dependencies
-  libpq-dev
+  libpq-dev \
+  # cleaning up unused files
+  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /tmp
 
@@ -24,14 +29,14 @@ RUN --mount=type=cache,target=/root/.cache/pip \
   -r ${BUILD_ENVIRONMENT}.txt
 
 # Python 'run' stage
-FROM python as python-run-stage
+FROM python AS python-run-stage
 
 ARG BUILD_ENVIRONMENT=local
 ARG APP_HOME=/app
 
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV BUILD_ENV ${BUILD_ENVIRONMENT}
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV BUILD_ENV=${BUILD_ENVIRONMENT}
 
 # Allow piped commands to fail at any step and run, log command
 SHELL ["/bin/bash", "-ceux", "-o", "pipefail"]
@@ -102,6 +107,18 @@ RUN sed -i 's/\r$//g' /entrypoint \
 COPY ./compose/local/django/start /start
 RUN sed -i 's/\r$//g' /start \
   && chmod +x /start
+
+COPY ./compose/local/django/celery/worker/start /start-celeryworker
+RUN sed -i 's/\r$//g' /start-celeryworker \
+  && chmod +x /start-celeryworker
+
+COPY ./compose/local/django/celery/beat/start /start-celerybeat
+RUN sed -i 's/\r$//g' /start-celerybeat \
+  && chmod +x /start-celerybeat
+
+COPY ./compose/local/django/celery/flower/start /start-flower
+RUN sed -i 's/\r$//g' /start-flower \
+  && chmod +x /start-flower
 
 USER dev-user
 
