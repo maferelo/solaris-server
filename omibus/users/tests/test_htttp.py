@@ -30,7 +30,6 @@ def create_user(phone="+573017839876", password=PASSWORD, group_name="rider"):
 
 class AuthenticationTest(APITestCase):
     @patch("users.auth_backend.check_code")
-    @patch("users.twilio_client.Client")
     def test_user_can_log_in(self, mock_check_code):
         user = create_user()
         mock_check_code.return_value = True
