@@ -1,7 +1,8 @@
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-from trips.models import Trip
-from trips.serializers import NestedTripSerializer, TripSerializer  # new
+
+from .models import Trip
+from .serializers import NestedTripSerializer, TripSerializer  # new
 
 
 class TripsConsumer(AsyncJsonWebsocketConsumer):

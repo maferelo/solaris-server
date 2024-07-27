@@ -25,9 +25,9 @@ urlpatterns = [
 # API URLS
 urlpatterns += [
     # API base url
-    path("api/", include("apps.users.urls", namespace="users")),
+    path("api/", include("omibus.users.urls", namespace="users")),
     # Apps
-    path("api/trip/", include("apps.trips.urls", namespace="trip")),
+    path("api/trip/", include("omibus.trips.urls", namespace="trip")),
     # Swagger
     path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
     path("api/docs/", SpectacularSwaggerView.as_view(url_name="api-schema"), name="api-docs"),

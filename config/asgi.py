@@ -13,8 +13,10 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 from django.core.asgi import get_asgi_application
 from django.urls import path
 
-from apps.trips.consumers import TripsConsumer
-from apps.trips.middleware import TokenAuthMiddlewareStack
+asgi_application = get_asgi_application()
+
+from omibus.trips.consumers import TripsConsumer  # noqa: E402
+from omibus.trips.middleware import TokenAuthMiddlewareStack  # noqa: E402
 
 # If DJANGO_SETTINGS_MODULE is unset, default to the local settings
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
@@ -22,7 +24,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
 # This application object is used by any ASGI server configured to use this file.
 application = ProtocolTypeRouter(
     {
-        "http": get_asgi_application(),
+        "http": asgi_application,
         "websocket": TokenAuthMiddlewareStack(
             URLRouter(
                 [

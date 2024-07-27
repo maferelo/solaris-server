@@ -14,7 +14,7 @@ executors:
 
   ubuntu:
     machine:
-      image: ubuntu-2204:2023.07.2
+      image: ubuntu-2204:2024.05.1
       docker_layer_caching: true
 
 # Define a job to be invoked later in a workflow.
@@ -41,9 +41,9 @@ jobs:
     executor: ubuntu
     steps:
       - checkout
-      - run: docker compose -f local.yml build
+      - run: docker compose -f docker-compose.local.yml build
       - run: >-
-          docker compose -f local.yml run --rm django
+          docker compose -f docker-compose.local.yml run --rm django
           pytest
 
 # Orchestrate jobs using workflows

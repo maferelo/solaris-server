@@ -3,7 +3,8 @@ from django.contrib.auth.models import Group
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
-from trips.models import Trip
+
+from ..models import Trip
 
 PASSWORD = "pAssw0rd!"
 
