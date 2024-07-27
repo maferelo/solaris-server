@@ -77,10 +77,7 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
 ]
 
-LOCAL_APPS = [
-    "omibus.trips",
-    "omibus.users",
-]
+LOCAL_APPS = ["omibus.trips", "omibus.users", "omibus.planet"]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
