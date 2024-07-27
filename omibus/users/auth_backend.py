@@ -5,7 +5,7 @@ from .utils import check_code
 
 
 class PasswordlessAuthBackend(ModelBackend):
-    def authenticate(self, phone=None, code=None):
+    def authenticate(self, request, phone=None, code=None):
         user_model = get_user_model()
         if check_code(phone, code):
             try:

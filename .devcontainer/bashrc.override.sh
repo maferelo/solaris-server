@@ -21,6 +21,8 @@ if not User.objects.filter(phone="${DJANGO_SUPERUSER_PHONE}").exists():
     print("Superuser created.")
 EOF
 
+pre-commit install
+
 # restore default shell options
 set +o errexit
 set +o pipefail
