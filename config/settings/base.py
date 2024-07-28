@@ -279,6 +279,29 @@ SPECTACULAR_SETTINGS = {
     "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
 }
 
+# Channels
+# ------------------------------------------------------------------------------
+REDIS_URL = env("REDIS_URL")
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [REDIS_URL],
+        },
+    },
+}
+
+# Celery
+# ------------------------------------------------------------------------------
+# https://docs.celeryq.dev/en/stable/userguide/configuration.html#task-always-eager
+CELERY_TASK_ALWAYS_EAGER = False
+# https://docs.celeryq.dev/en/stable/userguide/configuration.html#task-eager-propagates
+CELERY_TASK_EAGER_PROPAGATES = True
+
+# Twilio
+# ------------------------------------------------------------------------------
+
 TWILIO_ACCOUNT_SID = env("TWILIO_ACCOUNT_SID", default="dummy")
 TWILIO_AUTH_TOKEN = env("TWILIO_AUTH_TOKEN", default="dummy")
 TWILIO_SERVICE_SID = env("TWILIO_SERVICE_SID", default="dummy")
