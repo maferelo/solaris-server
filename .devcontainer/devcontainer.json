@@ -1,7 +1,9 @@
 // For format details, see https://containers.dev/implementors/json_reference/
 {
   "name": "solaris_dev",
-  "dockerComposeFile": ["../docker-compose.local.yml"],
+  "dockerComposeFile": [
+    "../docker-compose.local.yml"
+  ],
   "init": true,
   "mounts": [
     {
@@ -33,7 +35,7 @@
           "analysis.typeCheckingMode": "basic",
           "defaultInterpreterPath": "/usr/local/bin/python",
           "editor.codeActionsOnSave": {
-            "source.organizeImports": true
+            "source.organizeImports": "always"
           },
           // Uncomment when fixed
           // https://github.com/microsoft/vscode-remote-release/issues/8474
@@ -92,5 +94,7 @@
   "postCreateCommand": "cat .devcontainer/bashrc.override.sh >> ~/.bashrc",
   "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && cp -r /home/dev-user/hooks /app/.git/hooks && chmod +x /app/.git/hooks/*",
   // Uncomment the next line if you want start specific services in your Docker Compose config.
-  "runServices": ["docs"]
+  "runServices": [
+    "docs"
+  ]
 }
