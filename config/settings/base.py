@@ -65,7 +65,6 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.postgres",
-    "django.contrib.staticfiles",
     "django.contrib.admin",
     "django.contrib.gis",
 ]
