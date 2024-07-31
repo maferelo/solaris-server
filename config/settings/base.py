@@ -84,7 +84,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-# MIGRATION_MODULES = {"sites": "solaris.contrib.sites.migrations"}
+# MIGRATION_MODULES = {"sites": "omibus.contrib.sites.migrations"}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -276,8 +276,8 @@ SIMPLE_JWT = {
 # By Default swagger ui is available only to admin user(s). You can change permission classes to change that
 # See more configuration options at https://drf-spectacular.readthedocs.io/en/latest/settings.html#settings
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Solaris API",
-    "DESCRIPTION": "Documentation of API endpoints of Solaris",
+    "TITLE": "omibus API",
+    "DESCRIPTION": "Documentation of API endpoints of omibus",
     "VERSION": "1.0.0",
     "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
 }
