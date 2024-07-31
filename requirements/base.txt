@@ -14,7 +14,7 @@ drf-spectacular==0.26.5
 flower==2.0.1
 ortools==9.10.4067
 phonenumbers==8.13.40
-Pillow==10.1.0
+Pillow==10.3.0
 redis==5.0.1
 twilio==9.2.3
 twisted[tls,http2]==24.3.0
