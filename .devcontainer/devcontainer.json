@@ -64,12 +64,9 @@
       "extensions": [
         "74th.monokai-charcoal-high-contrast",
         "christian-kohler.path-intellisense",
-        "circleci.circleci",
         "davidanson.vscode-markdownlint",
         "eamodio.gitlens",
         "github.copilot",
-        "github.vscode-github-actions",
-        "github.vscode-pull-request-github",
         "ivangabriele.vscode-heroku",
         "markis.code-coverage",
         "mikestead.dotenv",
