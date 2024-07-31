@@ -44,7 +44,9 @@ jobs:
       - run: docker compose -f docker-compose.local.yml build
       - run: >-
           docker compose -f docker-compose.local.yml run --rm django
-          pytest
+          coverage run -m pytest && coverage html
+      - store_artifacts:
+          path: htmlcov
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
