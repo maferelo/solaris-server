@@ -44,7 +44,7 @@ jobs:
       - run: docker compose -f docker-compose.ci.yml build
       - run: >-
           docker compose -f docker-compose.ci.yml run --user dev-user django
-          bash -c "coverage run -m pytest && coverage html --fail-under=80"
+          bash -c "coverage run -m pytest && coverage html --fail-under=100"
       - run: >-
           docker cp $(docker ps -aqf "ancestor=omibus_local_django"):/app/htmlcov .
       - store_artifacts:
