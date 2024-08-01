@@ -46,8 +46,8 @@ jobs:
           docker compose -f docker-compose.ci.yml run --user dev-user django
           bash -c "coverage run -m pytest && coverage html"
       - run: docker container ls -a
-      - run: docker ps -aqf "name=omibus_local_django"
-      - run: docker cp $( docker ps -aqf "name=omibus_local_django"):/app/htmlcov .
+      - run: echo `docker ps -aqf "name=omibus_local_django"`
+      - run: docker cp `docker ps -aqf "name=omibus_local_django"`:/app/htmlcov .
       - store_artifacts:
           path: htmlcov
 
