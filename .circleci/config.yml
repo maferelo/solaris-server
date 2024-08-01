@@ -44,6 +44,12 @@ jobs:
       - run: docker compose -f docker-compose.local.yml build
       - run: >-
           docker compose -f docker-compose.ci.yml run --user dev-user django
+          whoami && ls -al && pwd && mkdir -p /app/cov && touch /app/cov/.coverage
+      - run: >-
+          docker compose -f docker-compose.ci.yml run --user dev-user django
+          whoami && ls -al
+      - run: >-
+          docker compose -f docker-compose.ci.yml run --user dev-user django
           coverage run -m pytest && ls -al
       - run: >-
           docker compose -f docker-compose.ci.yml run --user dev-user django
