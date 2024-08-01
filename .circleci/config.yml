@@ -44,7 +44,7 @@ jobs:
       - run: docker compose -f docker-compose.local.yml build
       - run: >-
           docker compose -f docker-compose.local.yml run --user dev-user --rm django
-          whoami && ls -al && mkdir -p htmlcov && ls -al htmlcov && ls -al /app && la -al /
+          whoami && ls -al && mkdir -p cov && touch cov/.coverage && ls -al && mkdir -p cov/htmlcov
       - run: >-
           docker compose -f docker-compose.local.yml run --user dev-user --rm django
           coverage run --data-file=htmlcov/.coverage -m pytest
