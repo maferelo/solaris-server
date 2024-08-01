@@ -44,7 +44,10 @@ jobs:
       - run: docker compose -f docker-compose.local.yml build
       - run: >-
           docker compose -f docker-compose.local.yml run --rm django
-          sudo mkdir cov && coverage run -m pytest --directory=cov
+          sudo mkdir cov
+      - run: >-
+          docker compose -f docker-compose.local.yml run --rm django
+          coverage run -m pytest --directory=cov
       - store_artifacts:
           path: htmlcov
 
