@@ -44,7 +44,10 @@ jobs:
       - run: docker compose -f docker-compose.local.yml build
       - run: >-
           docker compose -f docker-compose.local.yml run --rm django
-          coverage run --data-file=$HOME/cov -m pytest && coverage report html  --data-file=$HOME/cov --directory=$HOME/htmlcov
+          mkdir -p $HOME/htmlcov
+      - run: >-
+          docker compose -f docker-compose.local.yml run --rm django
+          coverage run --data-file=$HOME/cov -m pytest && coverage report  --data-file=$HOME/cov --directory=$HOME/htmlcov html
       - store_artifacts:
           path: htmlcov
 
