@@ -11,7 +11,6 @@ executors:
       # use one of our convenience images from CircleCI's Developer Hub.
       # See: https://circleci.com/docs/configuration-reference/#executor-job
       - image: cimg/python:3.11.6
-        user: dev-user
 
   ubuntu:
     machine:
@@ -45,7 +44,7 @@ jobs:
       - run: docker compose -f docker-compose.local.yml build
       - run: >-
           docker compose -f docker-compose.local.yml run --rm django
-          coverage run --data-file=$HOME/cov -m pytest && coverage report  --data-file=$HOME/cov --directory=$HOME/htmlcov html
+          sudo -u dev-user coverage run --data-file=$HOME/cov -m pytest && coverage report  --data-file=$HOME/cov --directory=$HOME/htmlcov html
       - store_artifacts:
           path: htmlcov
 
