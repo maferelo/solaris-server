@@ -47,7 +47,7 @@ jobs:
           whoami && ls -al && mkdir -p cov && touch cov/.coverage && ls -al && mkdir -p cov/htmlcov
       - run: >-
           docker compose -f docker-compose.local.yml run --user dev-user --rm django
-          coverage run --data-file=htmlcov/.coverage -m pytest
+          coverage run --data-file=./cov/.coverage -m pytest
       - store_artifacts:
           path: htmlcov
 
