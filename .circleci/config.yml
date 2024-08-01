@@ -44,19 +44,7 @@ jobs:
       - run: docker compose -f docker-compose.local.yml build
       - run: >-
           docker compose -f docker-compose.local.yml run --rm django
-          whoami
-      - run: >-
-          docker compose -f docker-compose.local.yml run --rm django
-          ls -al
-      - run: >-
-          docker compose -f docker-compose.local.yml run --rm django
-          echo $HOME
-      - run: >-
-          docker compose -f docker-compose.local.yml run --rm django
-          coverage run -m pytest
-      - run: >-
-          docker compose -f docker-compose.local.yml run --rm django
-          ls -al
+          mkdir cov && coverage run -m pytest --directory=cov
       - store_artifacts:
           path: htmlcov
 
