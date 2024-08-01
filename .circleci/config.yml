@@ -44,7 +44,7 @@ jobs:
       - run: docker compose -f docker-compose.local.yml build
       - run: >-
           docker compose -f docker-compose.local.yml run --user dev-user --rm django
-          whoami && ls -al
+          whoami && ls -al && mkdir -p htmlcov
       - store_artifacts:
           path: htmlcov
 
