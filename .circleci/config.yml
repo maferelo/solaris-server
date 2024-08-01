@@ -45,9 +45,8 @@ jobs:
       - run: >-
           docker compose -f docker-compose.ci.yml run --user dev-user django
           bash -c "coverage run -m pytest && coverage html"
-      - run: docker container ls -a
-      - run: docker ps | awk '/omibus_local_django/ { print $1 }'
-      - run: docker ps -aqf "ancestor=omibus_local_django"
+      - run: >-
+          docker cp $(docker ps -aqf "ancestor=omibus_local_django"):/app/htmlcov .
       - store_artifacts:
           path: htmlcov
 
