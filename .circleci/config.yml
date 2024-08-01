@@ -41,7 +41,7 @@ jobs:
     executor: ubuntu
     steps:
       - checkout
-      - run: docker compose -f docker-compose.ci.local.yml build
+      - run: docker compose -f docker-compose.ci.yml build
       - run: >-
           docker compose -f docker-compose.ci.yml run --user dev-user django
           coverage run -m pytest && coverage report
