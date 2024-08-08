@@ -1,11 +1,14 @@
 from django.conf import settings
+from twilio.base.exceptions import TwilioRestException
 
 from .twilio_client import client
 
 
 def check_code(phone, code):
-    verification_check = client.verify.services(settings.TWILIO_SERVICE_SID).verification_checks.create(
-        to=phone, code=code
-    )
-
-    return verification_check.status == "approved"
+    try:
+        return (
+            client.verify.services(settings.TWILIO_SERVICE_SID).verification_checks.create(to=phone, code=code).status
+            == "approved"
+        )
+    except TwilioRestException:
+        return False

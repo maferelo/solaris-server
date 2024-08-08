@@ -14,6 +14,4 @@ def get_users_count():
 
 @shared_task()
 def send_code(phone):
-    verification = client.verify.services(settings.TWILIO_SERVICE_SID).verifications.create(to=phone, channel="sms")
-
-    return verification.sid
+    client.verify.services(settings.TWILIO_SERVICE_SID).verifications.create(to=phone, channel="sms")

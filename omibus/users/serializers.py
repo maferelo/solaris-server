@@ -36,10 +36,9 @@ class PhoneSerializer(serializers.CharField):
         super().__init__(*args, **kwargs)
         self.validators.append(self._validate_phone)
 
-    def to_internal_value(self, data):
-        data = super().to_internal_value(data)
-        phone = phonenumbers.parse(data, "CO")
-        return phonenumbers.format_number(phone, phonenumbers.PhoneNumberFormat.E164)
+    def run_validation(self, *args, **kwargs):
+        value = super().run_validation(*args, **kwargs)
+        return phonenumbers.format_number(phonenumbers.parse(value, "CO"), phonenumbers.PhoneNumberFormat.E164)
 
 
 class CodeSerializer(serializers.CharField):
