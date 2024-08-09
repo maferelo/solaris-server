@@ -18,7 +18,3 @@ class WorldBorder(models.Model):
 
     # GeoDjango-specific: a geometry field (MultiPolygonField)
     mpoly = models.MultiPolygonField()
-
-    # Returns the string representation of the model.
-    def __str__(self):
-        return self.name

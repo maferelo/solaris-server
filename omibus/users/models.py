@@ -4,11 +4,11 @@ from django.db import models
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, phone, password=None):
+    def create_user(self, phone, password=None, **extra_fields):
         if not phone:
             raise ValueError("Users must have a phone number")
 
-        user = self.model(phone=phone)
+        user = self.model(phone=phone, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user

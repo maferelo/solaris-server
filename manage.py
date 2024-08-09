@@ -18,7 +18,7 @@ def main():
         ) from exc
 
     # This allows easy placement of apps within the interior
-    # solaris directory.
+    # omibus directory.
     current_path = Path(__file__).parent.resolve()
     sys.path.append(str(current_path / "omibus"))
 
