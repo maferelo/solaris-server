@@ -27,9 +27,9 @@ def create_trip(
 
 
 @database_sync_to_async
-def create_user(phone, password, group="rider"):
+def create_user(phone, password, group="rider", is_active=True):
     # Create user.
-    user = get_user_model().objects.create_user(phone=phone, password=password)
+    user = get_user_model().objects.create_user(phone=phone, password=password, is_active=is_active)
 
     # Create user group.
     user_group, _ = Group.objects.get_or_create(name=group)  # new
@@ -50,6 +50,56 @@ class TestWebSocket:
         communicator = WebsocketCommunicator(application=application, path=f"/trip/?token={access}")
         connected, _ = await communicator.connect()
         assert connected is True
+        await communicator.disconnect()
+
+    async def test_request_trip_with_inactive_user(self, settings):
+        settings.CHANNEL_LAYERS = TEST_CHANNEL_LAYERS
+        user, access = await create_user("+000000000", "pAssw0rd", "driver", is_active=False)
+        communicator = WebsocketCommunicator(application=application, path=f"/trip/?token={access}")
+        await communicator.connect()
+        await communicator.send_json_to(
+            {
+                "type": "create.trip",
+                "data": {
+                    "pick_up_address": "123 Main Street",
+                    "drop_off_address": "456 Piney Road",
+                    "rider": user.id,
+                },
+            }
+        )
+        response = await communicator.receive_json_from()
+        response_data = response.get("data")
+        assert response_data["id"] is not None
+        assert response_data["pick_up_address"] == "123 Main Street"
+        assert response_data["drop_off_address"] == "456 Piney Road"
+        assert response_data["status"] == "REQUESTED"
+        assert response_data["rider"]["phone"] == user.phone
+        assert response_data["driver"] is None
+        await communicator.disconnect()
+
+    async def test_request_trip_with_anonymous_user(self, settings):
+        settings.CHANNEL_LAYERS = TEST_CHANNEL_LAYERS
+        user, access = await create_user("+000000000", "pAssw0rd", "driver")
+        communicator = WebsocketCommunicator(application=application, path="/trip/?token=invalid-token")
+        await communicator.connect()
+        await communicator.send_json_to(
+            {
+                "type": "create.trip",
+                "data": {
+                    "pick_up_address": "123 Main Street",
+                    "drop_off_address": "456 Piney Road",
+                    "rider": user.id,
+                },
+            }
+        )
+        response = await communicator.receive_json_from()
+        response_data = response.get("data")
+        assert response_data["id"] is not None
+        assert response_data["pick_up_address"] == "123 Main Street"
+        assert response_data["drop_off_address"] == "456 Piney Road"
+        assert response_data["status"] == "REQUESTED"
+        assert response_data["rider"]["phone"] == user.phone
+        assert response_data["driver"] is None
         await communicator.disconnect()
 
     async def test_can_send_and_receive_messages(self, settings):

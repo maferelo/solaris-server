@@ -1,28 +1,31 @@
 from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 
-CODE = "123456"
-PASSWORD = "pAssw0rd!"
+from omibus.users.auth_backend import PasswordlessAuthBackend
+
+from .constants import CODE
+from .utils import create_user
 
 
-def create_user(phone="+573017839876", password=PASSWORD, group_name="rider"):
-    group, _ = Group.objects.get_or_create(name=group_name)
-    user = get_user_model().objects.create_user(phone=phone, password=password)
-    user.groups.add(group)
-    user.save()
-    return user
+class SuperUserTest(APITestCase):
+    def test_create_superuser(self):
+        super_user = get_user_model().objects.create_superuser(phone="+573017839876", password="password")
+        self.assertTrue(super_user.is_staff)
+        self.assertTrue(super_user.is_superuser)
+        self.assertTrue(super_user.is_admin)
+
+    def test_create_superuser_without_phone(self):
+        with self.assertRaises(ValueError):
+            get_user_model().objects.create_superuser(phone=None, password="password")
 
 
-class SendCodeTest(APITestCase):
-    @patch("omibus.users.views.send_code")
-    def test_user_can_request_code(self, send_code):
+class AuthenticationTest(APITestCase):
+    def test_user_can_request_code(self):
         user = create_user()
-        send_code.return_value = None
         response = self.client.post(
             reverse("users:send_code"),
             data={
@@ -32,9 +35,7 @@ class SendCodeTest(APITestCase):
 
         self.assertEqual(status.HTTP_200_OK, response.status_code)
 
-    @patch("omibus.users.views.send_code")
-    def test_user_cannot_request_code_with_invalid_phone(self, send_code):
-        send_code.return_value = None
+    def test_user_cannot_request_code_with_invalid_phone(self):
         response = self.client.post(
             reverse("users:send_code"),
             data={
@@ -44,12 +45,8 @@ class SendCodeTest(APITestCase):
 
         self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
 
-
-class AuthenticationTest(APITestCase):
-    @patch("omibus.users.auth_backend.check_code")
-    def test_user_can_log_in(self, mock_check_code):
+    def test_user_can_log_in(self):
         user = create_user()
-        mock_check_code.return_value = True
         response = self.client.post(
             reverse("users:log_in"),
             data={
@@ -69,8 +66,34 @@ class AuthenticationTest(APITestCase):
             reverse("users:log_in"),
             data={
                 "phone": user.phone,
+                "code": "abcd",
+            },
+        )
+
+        self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
+
+        response = self.client.post(
+            reverse("users:log_in"),
+            data={
+                "phone": user.phone,
                 "code": CODE,
             },
         )
 
         self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
+
+    def test_authenticate_new_user(self):
+        auth_backend = PasswordlessAuthBackend()
+        user = auth_backend.authenticate("", phone="+573017839876", code=CODE)
+        self.assertEqual(user.phone, "+573017839876")
+
+    def test_get_user_that_exists(self):
+        user = create_user()
+        auth_backend = PasswordlessAuthBackend()
+        user = auth_backend.get_user(user.pk)
+        self.assertEqual(user.phone, "+573017839876")
+
+    def test_get_user_that_does_not_exist(self):
+        auth_backend = PasswordlessAuthBackend()
+        user = auth_backend.get_user(1)
+        self.assertIsNone(user)
