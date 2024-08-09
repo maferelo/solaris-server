@@ -1,5 +1,5 @@
-.. image:: https://dl.circleci.com/status-badge/img/gh/maferelo/solaris-python/tree/main.svg?style=svg
-        :target: https://dl.circleci.com/status-badge/redirect/gh/maferelo/solaris-python/tree/main
+.. image:: https://dl.circleci.com/status-badge/img/gh/maferelo/omibus-python/tree/main.svg?style=svg
+        :target: https://dl.circleci.com/status-badge/redirect/gh/maferelo/omibus-python/tree/main
 
 ======
 Omibus

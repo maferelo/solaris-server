@@ -1,0 +1,79 @@
+volumes:
+  omibus_local_postgres_data: {}
+  omibus_local_postgres_data_backups: {}
+  omibus_local_redis_data: {}
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: omibus_local_django
+    container_name: omibus_local_django
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - "8000:8000"
+    command: tail -f /dev/null
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: omibus_production_postgres
+    container_name: omibus_local_postgres
+    volumes:
+      - omibus_local_postgres_data:/var/lib/postgresql/data
+      - omibus_local_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.local/.postgres
+
+  docs:
+    image: omibus_local_docs
+    container_name: omibus_local_docs
+    build:
+      context: .
+      dockerfile: ./compose/local/docs/Dockerfile
+    volumes:
+      - ./docs:/docs:z
+    ports:
+      - "9000:9000"
+    command: /start-docs
+
+  redis:
+    image: docker.io/redis:6
+    container_name: omibus_local_redis
+    volumes:
+      - omibus_local_redis_data:/data
+
+  celeryworker:
+    <<: *django
+    image: omibus_local_celeryworker
+    container_name: omibus_local_celeryworker
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-celeryworker
+
+  celerybeat:
+    <<: *django
+    image: omibus_local_celerybeat
+    container_name: omibus_local_celerybeat
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-celerybeat
+
+  flower:
+    <<: *django
+    image: omibus_local_flower
+    container_name: omibus_local_flower
+    ports:
+      - '5555:5555'
+    command: /start-flower
