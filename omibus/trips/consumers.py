@@ -2,7 +2,7 @@ from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 
 from .models import Trip
-from .serializers import NestedTripSerializer, TripSerializer  # new
+from .serializers import NestedTripSerializer, TripSerializer
 
 
 class TripsConsumer(AsyncJsonWebsocketConsumer):
@@ -54,7 +54,7 @@ class TripsConsumer(AsyncJsonWebsocketConsumer):
         await self.channel_layer.group_send(group="drivers", message={"type": "echo.message", "data": trip_data})
 
         # Add rider to trip group.
-        await self.channel_layer.group_add(group=f"{trip.id}", channel=self.channel_name)  # new
+        await self.channel_layer.group_add(group=f"{trip.id}", channel=self.channel_name)
 
         await self.send_json(
             {
@@ -77,11 +77,9 @@ class TripsConsumer(AsyncJsonWebsocketConsumer):
 
         await super().disconnect(code)
 
-    # changed
     async def echo_message(self, message):
         await self.send_json(message)
 
-    # changed
     async def receive_json(self, content, **kwargs):
         message_type = content.get("type")
         if message_type == "create.trip":

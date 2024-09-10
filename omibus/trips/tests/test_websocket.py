@@ -32,7 +32,7 @@ def create_user(phone, password, group="rider", is_active=True):
     user = get_user_model().objects.create_user(phone=phone, password=password, is_active=is_active)
 
     # Create user group.
-    user_group, _ = Group.objects.get_or_create(name=group)  # new
+    user_group, _ = Group.objects.get_or_create(name=group)
     user.groups.add(user_group)
     user.save()
 
