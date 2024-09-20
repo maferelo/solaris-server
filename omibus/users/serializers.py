@@ -48,3 +48,4 @@ class SendCodeSerializer(serializers.Serializer):
 class LogInSerializer(serializers.Serializer):
     phone = PhoneSerializer()
     code = CodeSerializer()
+    group = serializers.CharField()

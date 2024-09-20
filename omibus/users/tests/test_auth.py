@@ -52,6 +52,7 @@ class AuthenticationTest(APITestCase):
             data={
                 "phone": user.phone,
                 "code": CODE,
+                "group": "rider",
             },
         )
 
@@ -77,6 +78,7 @@ class AuthenticationTest(APITestCase):
             data={
                 "phone": user.phone,
                 "code": CODE,
+                "group": "rider",
             },
         )
 
