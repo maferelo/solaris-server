@@ -47,6 +47,9 @@ class TripsConsumer(AsyncJsonWebsocketConsumer):
 
     async def create_trip(self, message):
         data = message.get("data")
+        if self.scope["user"].id is None:
+            await self.send_json({"error": "User is not authenticated."})
+        data["rider"] = self.scope["user"].id
         trip = await self._create_trip(data)
         trip_data = await self._get_trip_data(trip)
 
@@ -91,6 +94,9 @@ class TripsConsumer(AsyncJsonWebsocketConsumer):
 
     async def update_trip(self, message):
         data = message.get("data")
+        user_group = await self._get_user_group(self.scope["user"])
+        if user_group == "driver":
+            data["driver"] = self.scope["user"].id
         trip = await self._update_trip(data)
         trip_id = f"{trip.id}"
         trip_data = await self._get_trip_data(trip)

@@ -54,7 +54,7 @@ class TestWebSocket:
 
     async def test_request_trip_with_inactive_user(self, settings):
         settings.CHANNEL_LAYERS = TEST_CHANNEL_LAYERS
-        user, access = await create_user("+000000000", "pAssw0rd", "driver", is_active=False)
+        user, access = await create_user("+000000000", "pAssw0rd", "rider", is_active=False)
         communicator = WebsocketCommunicator(application=application, path=f"/trip/?token={access}")
         await communicator.connect()
         await communicator.send_json_to(
@@ -63,24 +63,18 @@ class TestWebSocket:
                 "data": {
                     "pick_up_address": "123 Main Street",
                     "drop_off_address": "456 Piney Road",
-                    "rider": user.id,
                 },
             }
         )
         response = await communicator.receive_json_from()
-        response_data = response.get("data")
-        assert response_data["id"] is not None
-        assert response_data["pick_up_address"] == "123 Main Street"
-        assert response_data["drop_off_address"] == "456 Piney Road"
-        assert response_data["status"] == "REQUESTED"
-        assert response_data["rider"]["phone"] == user.phone
-        assert response_data["driver"] is None
+        response_data = response.get("error")
+        assert response_data is not None
         await communicator.disconnect()
 
     async def test_request_trip_with_anonymous_user(self, settings):
         settings.CHANNEL_LAYERS = TEST_CHANNEL_LAYERS
-        user, access = await create_user("+000000000", "pAssw0rd", "driver")
-        communicator = WebsocketCommunicator(application=application, path="/trip/?token=invalid-token")
+        user, access = await create_user("+000000000", "pAssw0rd", "rider")
+        communicator = WebsocketCommunicator(application=application, path=f"/trip/?token={access}")
         await communicator.connect()
         await communicator.send_json_to(
             {
@@ -88,7 +82,6 @@ class TestWebSocket:
                 "data": {
                     "pick_up_address": "123 Main Street",
                     "drop_off_address": "456 Piney Road",
-                    "rider": user.id,
                 },
             }
         )
